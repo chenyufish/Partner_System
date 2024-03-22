@@ -1,28 +1,25 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import  {Icon,Button, NavBar,Tabbar,TabbarItem,Toast} from "vant";
-
 // @ts-ignore
+import Vant from "vant";
+import 'vant/lib/index.css'
+
 import * as VueRouter from 'vue-router';
-import routes from "./config/router";
+import routes from "./config/route.ts";
 
 
 const app = createApp(App);
-app.use(Button);
-app.use(NavBar);
-app.use(Icon);
-app.use(Tabbar);
-app.use(TabbarItem);
-app.use(Toast);
+app.use(Vant);
+
 
 
 const router = VueRouter.createRouter({
-    // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
-    history: VueRouter.createWebHashHistory(),
-    routes, // `router: router` 的缩写
+    // 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
+    history: VueRouter.createWebHistory(),
+    routes, //
 })
 
-app.use(router)
+app.use(router);
 
 
 app.mount('#app')
