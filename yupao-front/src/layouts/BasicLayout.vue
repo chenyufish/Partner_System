@@ -35,7 +35,7 @@ const onClickRight =()=>{
   router.push('/search')
 };
 const onClickLeft =()=>{
-  router.push('/')
+  router.back()
 };
 
 
