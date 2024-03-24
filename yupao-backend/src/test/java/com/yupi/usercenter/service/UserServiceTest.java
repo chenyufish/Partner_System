@@ -28,7 +28,7 @@ public class UserServiceTest {
     @Test
     public void testAddUser() {
         User user = new User();
-        user.setUsername("dogYupi");
+        user.setUsername("Yupi");
         user.setUserAccount("123");
         user.setAvatarUrl("https://636f-codenav-8grj8px727565176-1256524210.tcb.qcloud.la/img/logo.png");
         user.setGender(0);
@@ -52,7 +52,7 @@ public class UserServiceTest {
         user.setUserAccount("123");
         user.setAvatarUrl("https://636f-codenav-8grj8px727565176-1256524210.tcb.qcloud.la/img/logo.png");
         user.setGender(0);
-        user.setUserPassword("xxx");
+        user.setUserPassword("12345678");
         user.setPhone("123");
         user.setEmail("456");
         boolean result = userService.updateById(user);

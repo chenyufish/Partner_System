@@ -14,6 +14,7 @@
       </div>
     </van-form>
 </template>
+//todo validator函数检验可以增加简历的亮点
 <script setup lang="ts">
 import {useRoute} from "vue-router";
 import {ref} from "vue";
@@ -25,8 +26,8 @@ const editUser=ref({
     currentValue:route.query.currentValue,
     editName:route.query.editName,
 })
-const onSubmit=(values)=>{
-  //todo把editKey,currentValue,editName提交的后台
+const onSubmit=(values:any)=>{
+  //todo 把editKey,currentValue,editName提交的后台
   console.log('onSubmit='+values);
 };
 
