@@ -9,6 +9,7 @@ export type UserType ={
     gender :number;
     phone :string;
     email :string;
+    profile ?: string;
     userStatus :string;
     userRole :string;
     planetCode :string;
