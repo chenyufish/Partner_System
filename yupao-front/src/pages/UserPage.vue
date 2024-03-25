@@ -15,6 +15,8 @@
 
 <script setup lang="ts">
 import {useRouter} from "vue-router";
+
+
 const router=useRouter();
 const toEdit = (editKey: string, editName: string, currentValue: string) => {
   router.push({
@@ -50,6 +52,7 @@ const user = {
   planetCode: '1234',
   createTime: new Date(),
 }
+
 </script>
 
 

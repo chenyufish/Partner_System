@@ -1,5 +1,7 @@
 package com.yupi.usercenter.contant;
 
+import java.util.Arrays;
+
 /**
  * 用户常量
  *

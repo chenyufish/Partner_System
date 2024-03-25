@@ -201,6 +201,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         if (CollectionUtils.isEmpty(tagNameList)){
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
+        //这个是使用MYSQL的like语句进行查询
 //        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
 //        //拼接tag
 //        // like '%Java%' and like '%Python%'
@@ -209,7 +210,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 //        }
 //        List<User> userList = userMapper.selectList(queryWrapper);
 //        return  userList.stream().map(this::getSafetyUser).collect(Collectors.toList());
-
+        //这里是使用内存查询
         //1.先查询所有用户
         QueryWrapper queryWrapper = new QueryWrapper<>();
         List<User> userList = userMapper.selectList(queryWrapper);

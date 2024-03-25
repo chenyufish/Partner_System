@@ -84,6 +84,8 @@ public class User implements Serializable {
      * 星球编号
      */
     private String planetCode;
+
+    private String profile;
     /**
      *  标签列表
      */
