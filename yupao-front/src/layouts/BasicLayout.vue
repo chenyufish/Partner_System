@@ -44,7 +44,9 @@ const onClickLeft =()=>{
 
 
 <style scoped>
-
+#content{
+  padding-bottom: 50px;
+}
 </style>
 
 

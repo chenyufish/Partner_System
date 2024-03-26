@@ -30,7 +30,7 @@
         avatarUrl,gender,userPassword,
         phone,email,userStatus,
         createTime,updateTime,isDelete,
-        userRole,planetCode,tags
+        userRole,planetCode,profile,tags
     </sql>
 
 </mapper>

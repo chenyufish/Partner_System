@@ -71,7 +71,7 @@ let tagList = ref(originTagList);
  *  搜索过滤
  * @param val
  */
-const onSearch = (val) => {
+const onSearch = () => {
   tagList.value = originTagList.map(parentTag =>{
     const tempChildren =  [...parentTag.children];
     const tempParentTag =  {...parentTag};

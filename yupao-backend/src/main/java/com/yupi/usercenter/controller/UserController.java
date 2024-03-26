@@ -30,7 +30,7 @@ import static com.yupi.usercenter.contant.UserConstant.USER_LOGIN_STATE;
  */
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins={"http://localhost:81"})
+@CrossOrigin(origins={"http://localhost:4000"})
 public class UserController {
 
     @Resource
@@ -139,7 +139,19 @@ public class UserController {
     }
 
     /**
-     *      用户信息更新
+     * 用户推荐
+     * @param request
+     * @return
+     */
+    @GetMapping("/recommend")
+    public BaseResponse<List<User>>recommendUsers(HttpServletRequest request) {
+        QueryWrapper<User> queryWrapper=new QueryWrapper<>();
+        List<User> userList=userService.list(queryWrapper);
+        List<User> list=userList.stream().map(user->userService.getSafetyUser(user)).collect(Collectors.toList());
+        return ResultUtils.success(list);
+    }
+    /**
+     * 用户信息更新
      * @param user
      * @param request
      * @return
@@ -155,7 +167,14 @@ public class UserController {
         int result = userService.updateUser(user,loginUser);
         return ResultUtils.success(result);
     }
+    //TODO 这里似乎没有对用户进行用户校队
 
+    /**
+     * 删除用户
+     * @param id
+     * @param request
+     * @return
+     */
     @PostMapping("/delete")
     public BaseResponse<Boolean> deleteUser(@RequestBody long id, HttpServletRequest request) {
         if (!userService.isAdmin(request)) {
@@ -167,12 +186,5 @@ public class UserController {
         boolean b = userService.removeById(id);
         return ResultUtils.success(b);
     }
-
-    /**
-     * 是否为管理员
-     *
-     * @param request
-     * @return
-     */
 
 }

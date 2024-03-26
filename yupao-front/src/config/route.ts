@@ -3,8 +3,8 @@ import Team from '../pages/TeamPage.vue';
 import User from '../pages/UserPage.vue';
 import SearchPage from '../pages/SearchPage.vue';
 import UserEditPage from '../pages/UserEditPage.vue';
-import UserAccountEditPage from '../pages/UserAccountEditPage.vue';
-import SearchResultPage from "../pages/SearchResultPage.vue";
+import SearchResultPage from '../pages/SearchResultPage.vue';
+import UserLoginPage from '../pages/UserLoginPage.vue';
 
 const routes=[
     {path:'/',component: Index},
@@ -12,8 +12,8 @@ const routes=[
     {path: '/user',component: User},
     {path: '/search',component: SearchPage},
     {path: '/user/edit', component: UserEditPage},
-    {path: '/user/accountEdit',component:UserAccountEditPage},
     {path: '/user/list',component:SearchResultPage},
+    {path:'/user/login',component:UserLoginPage},
 
 ]
 

@@ -29,19 +29,19 @@ import qs from 'qs'
 const route = useRoute();
 const {tags} = route.query;
 
-const mockUser = ref({
-  id: 931,
-  username: '沙鱼',
-  userAccount: 'shayu',
-  profile: '一条咸鱼',
-  gender: 0,
-  phone: '123456789101',
-  email: 'shayu-yusha@qq.com',
-  planetCode: '931',
-  avatarUrl: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/shayu931/shayu.png',
-  tags: ['java', 'emo', '打工中', 'emo', '打工中'],
-  createTime: new Date(),
-})
+// const mockUser = ref({
+//   id: 931,
+//   username: '沙鱼',
+//   userAccount: 'shayu',
+//   profile: '一条咸鱼',
+//   gender: 0,
+//   phone: '123456789101',
+//   email: 'shayu-yusha@qq.com',
+//   planetCode: '931',
+//   avatarUrl: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/shayu931/shayu.png',
+//   tags: ['java', 'emo', '打工中', 'emo', '打工中'],
+//   createTime: new Date(),
+// })
 
 const userList = ref([]);
 
@@ -49,7 +49,7 @@ const userList = ref([]);
 onMounted( async () =>{
   // 为给定 ID 的 user 创建请求
   const userListData = await  myAxios.get('/user/search/tags',{
-    withCredentials: false,
+    withCredentials: true,
     params: {
       tagNameList: tags
     },
@@ -62,8 +62,9 @@ onMounted( async () =>{
       .then(function (response) {
         console.log('/user/search/tags succeed',response);
         showSuccessToast('请求成功');
-        return response.data?.data;
+        return response?.data;
       })
+      //todo 减少了一层data的读取，即可以成功解析出用户数据
       .catch(function (error) {
         console.log('/user/search/tags error',error);
         showFailToast('请求失败');

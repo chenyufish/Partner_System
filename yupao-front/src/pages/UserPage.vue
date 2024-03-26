@@ -1,26 +1,42 @@
 <template>
-    <template v-if="user">
-      <van-cell title="昵称" is-link to="/user/edit" :value="user.username"  @click="toEdit('username', '昵称', user.username)"/>
-      <van-cell title="账号" is-link to="/user/accountEdit" :value="user.userAccount" @click="toAccountEdit('userAccount','账户',user.userAccount)"/>
-      <van-cell title="头像" is-link to="/user/edit">
-        <img style="height: 48px" :src="user.avatarUrl"/>
-      </van-cell>
-      <van-cell title="性别" is-link :value="user.gender" @click="toEdit('gender', '性别', user.gender)"/>
-      <van-cell title="电话" is-link to="/user/edit" :value="user.phone" @click="toEdit('phone', '电话', user.phone)"/>
-      <van-cell title="邮箱" is-link to="/user/edit" :value="user.email" @click="toEdit('email', '邮箱', user.email)"/>
-      <van-cell title="星球编号" :value="user.planetCode"/>
-      <van-cell title="注册时间" :value="user.createTime.toISOString()"/>
-    </template>
+  <template v-if="user">
+    <van-cell title="昵称" is-link to="/user/edit" :value="user.username" @click="toEdit('username','昵称',user.username)"/>
+    <van-cell title="账户" :value="user.userAccount" />
+    <van-cell title="头像" is-link to="/user/edit" >
+      <img style="height: 48px" :src="user.avatarUrl">
+    </van-cell>
+    <van-cell title="性别" is-link to="/user/edit" :value="getGenderText(user.gender)" @click="toEdit('gender','性别',user.gender)" />
+    <van-cell title="电话" is-link to="/user/edit" :value="user.phone" @click="toEdit('phone','电话',user.phone)"/>
+    <van-cell title="邮箱" is-link to="/user/edit" :value="user.email" @click="toEdit('email','邮箱',user.email)"/>
+    <van-cell title="星球编号" :value="user.planetCode" />
+    <van-cell title="注册时间" :value="user.createTime"  />
+  </template>
 </template>
 
 <script setup lang="ts">
+
 import {useRouter} from "vue-router";
+import {onMounted, ref} from "vue";
+import {showFailToast, showSuccessToast} from "vant";
+import {getCurrentUser} from "../servcies/user";
 
+const user =ref();
+const router = useRouter();
 
-const router=useRouter();
-const toEdit = (editKey: string, editName: string, currentValue: string) => {
+onMounted(async () =>{
+  //获取用户信息
+  const res = await getCurrentUser();
+  if (res){
+    user.value = res;
+    showSuccessToast('获取用户信息成功');
+  } else {
+    showFailToast('获取用户信息失败')
+  }
+})
+
+const toEdit = (editKey: string,editName: string,currentValue: string) =>{
   router.push({
-    path: '/user/edit',
+    path:'/user/edit',
     query: {
       editKey,
       editName,
@@ -28,34 +44,11 @@ const toEdit = (editKey: string, editName: string, currentValue: string) => {
     }
   })
 }
-
-//TODO 这里准备加一个新页面那，用于修改密码
-const toAccountEdit = (editKey: string, editName: string, currentValue: string) => {
-  router.push({
-    path: '/user/accountEdit',
-    query: {
-      editKey,
-      editName,
-      currentValue,
-    }
-  })
+const getGenderText = (gender: number) => {
+  return gender === 1 ? '男' : (gender === 0 ? '女' : '未知');
 }
-
-const user = {
-  id: 1,
-  username: '昏睡红茶',
-  userAccount: '114514',
-  avatarUrl: 'https://636f-codenav-8grj8px727565176-1256524210.tcb.qcloud.la/img/logo.png',
-  gender: '男',
-  phone: '123112312',
-  email: '12345@qq.com',
-  planetCode: '1234',
-  createTime: new Date(),
-}
-
+//增加一个性别计算，懒得去后端改，先这样
 </script>
-
-
 
 <style scoped>
 
