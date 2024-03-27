@@ -20,6 +20,7 @@ spring:
     port: 6379
     host: localhost
     database: 1
+    #修改redis的数据库，redis带有16个数据库
   profiles:
     active: dev
 server:
