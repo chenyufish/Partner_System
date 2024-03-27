@@ -25,9 +25,10 @@ onMounted( async () =>{
   const userListData = await  myAxios.get('/user/recommend',{
     withCredentials: true,
     params: {
-      tagNameList: tags
+      pageSize:8,
+      pageNum:1,
     },
-
+    //todo 这里页面固定显示大小应该可以优化
     //序列化
     paramsSerializer: {
       serialize: params => qs.stringify(params, { indices: false}),
@@ -36,7 +37,7 @@ onMounted( async () =>{
       .then(function (response) {
         console.log('/user/recommend succeed',response);
         showSuccessToast('请求成功');
-        return response?.data;
+        return response?.data.records;
       })
       //todo 减少了一层data的读取，即可以成功解析出用户数据
       .catch(function (error) {

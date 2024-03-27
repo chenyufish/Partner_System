@@ -29,19 +29,6 @@ import qs from 'qs'
 const route = useRoute();
 const {tags} = route.query;
 
-// const mockUser = ref({
-//   id: 931,
-//   username: '沙鱼',
-//   userAccount: 'shayu',
-//   profile: '一条咸鱼',
-//   gender: 0,
-//   phone: '123456789101',
-//   email: 'shayu-yusha@qq.com',
-//   planetCode: '931',
-//   avatarUrl: 'https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/shayu931/shayu.png',
-//   tags: ['java', 'emo', '打工中', 'emo', '打工中'],
-//   createTime: new Date(),
-// })
 
 const userList = ref([]);
 

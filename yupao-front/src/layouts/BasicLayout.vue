@@ -1,6 +1,6 @@
 <template>
   <van-nav-bar
-      title="标题"
+      title="伙伴匹配系统"
       left-arrow
       @click-left="onClickLeft"
       @click-right="onClickRight"
