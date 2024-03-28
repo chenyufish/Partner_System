@@ -256,6 +256,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
         return userMapper.updateById(user);
     }
+
     /**
      * 是否为管理员
      *
@@ -278,13 +279,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return loginUser != null && loginUser.getUserRole() == UserConstant.ADMIN_ROLE;
     }
 
+    @Override
+    public List<User> matchUsers(long num, User loginUser) {
+        return null;
+    }
+
     /**
      *  获取当前用户信息
      * @param request
      * @return
      */
     @Override
-    public User getLogininUser(HttpServletRequest request) {
+    public User getLoginUser(HttpServletRequest request) {
         if (request == null){
             return null;
         }

@@ -150,7 +150,7 @@ public class UserController {
      */
     @GetMapping("/recommend")
     public BaseResponse<Page<User>> recommendUsers(long pageSize, long pageNum, HttpServletRequest request) {
-        User logininUser = userService.getLogininUser(request);
+        User logininUser = userService.getLoginUser(request);
         String redisKey = String.format("fishman:user:recommend:%s",logininUser.getId());
         ValueOperations valueOperations = redisTemplate.opsForValue();
         //如果有缓存，直接读取
@@ -182,7 +182,7 @@ public class UserController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         //鉴权
-        User loginUser = userService.getLogininUser(request);
+        User loginUser = userService.getLoginUser(request);
         int result = userService.updateUser(user,loginUser);
         return ResultUtils.success(result);
     }

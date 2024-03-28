@@ -1,15 +1,17 @@
 package com.yupi.usercenter.service;
 
-import com.yupi.usercenter.model.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
-
+import com.yupi.usercenter.model.domain.User;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+
 /**
  * 用户服务
  *
+ * @author fishman
  */
 public interface UserService extends IService<User> {
+
     /**
      * 用户注册
      *
@@ -20,6 +22,7 @@ public interface UserService extends IService<User> {
      * @return 新用户 id
      */
     long userRegister(String userAccount, String userPassword, String checkPassword, String planetCode);
+
     /**
      * 用户登录
      *
@@ -29,6 +32,7 @@ public interface UserService extends IService<User> {
      * @return 脱敏后的用户信息
      */
     User userLogin(String userAccount, String userPassword, HttpServletRequest request);
+
     /**
      * 用户脱敏
      *
@@ -36,6 +40,7 @@ public interface UserService extends IService<User> {
      * @return
      */
     User getSafetyUser(User originUser);
+
     /**
      * 用户注销
      *
@@ -44,21 +49,26 @@ public interface UserService extends IService<User> {
      */
     int userLogout(HttpServletRequest request);
 
+    /**
+     * 根据标签搜索用户
+     *
+     * @param tagNameList
+     * @return
+     */
     List<User> searchUsersByTags(List<String> tagNameList);
 
     /**
-     *  用户信息修改
+     * 更新用户信息
      * @param user
      * @return
      */
-    int updateUser(User user,User loginUser);
+    int updateUser(User user, User loginUser);
 
     /**
-     *  获取当前用户信息
-     * @param request
+     * 获取当前登录用户信息
      * @return
      */
-    User getLogininUser(HttpServletRequest request);
+    User getLoginUser(HttpServletRequest request);
 
     /**
      * 是否为管理员
@@ -75,4 +85,12 @@ public interface UserService extends IService<User> {
      * @return
      */
     boolean isAdmin(User loginUser);
+
+    /**
+     * 匹配用户
+     * @param num
+     * @param loginUser
+     * @return
+     */
+    List<User> matchUsers(long num, User loginUser);
 }
