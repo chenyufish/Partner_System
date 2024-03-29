@@ -1,11 +1,10 @@
-import {userType} from "./user";
+import {UserType} from "./user";
 
 /**
  * 队伍类别
  */
 export type TeamType = {
     id: number;
-    username:string;
     name: string;
     description: string;
     expireTime?: Date;
@@ -15,5 +14,6 @@ export type TeamType = {
     status: number;
     createTime: Date;
     updateTime: Date;
-    createUser?: userType;
+    createUser?: UserType;
+    hasJoinNum?: number;
 };

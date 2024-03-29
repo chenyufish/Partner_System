@@ -1,5 +1,5 @@
 <template>
-  <div id="teamAddPage">
+  <div id="teamPage">
     <van-form @submit="onSubmit">
       <van-cell-group inset>
         <van-field
@@ -34,11 +34,6 @@
               :min-date="minDate"
           />
         </van-popup>
-        <van-field name="stepper" label="最大人数">
-          <template #input>
-            <van-stepper v-model="addTeamData.maxNum" max="10" min="3"/>
-          </template>
-        </van-field>
         <van-field name="radio" label="队伍状态">
           <template #input>
             <van-radio-group v-model="addTeamData.status" direction="horizontal">
@@ -67,53 +62,66 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 
-import {useRouter} from "vue-router";
-import {ref} from "vue";
-import myAxios from "../plugins/myAxios";
+import {useRoute, useRouter} from "vue-router";
+import {onMounted, ref} from "vue";
+import myAxios from "../plugins/myAxios.js";
 import {showFailToast, showSuccessToast} from "vant";
 
 const router = useRouter();
+const route = useRoute();
+
 // 展示日期选择器
 const showPicker = ref(false);
-
-const initFormData = {
-  "name": "",
-  "description": "",
-  "expireTime": null,
-  "maxNum": 3,
-  "password": "",
-  "status": 0,
-}
-
 const minDate = new Date();
 
-// 需要用户填写的表单数据
-const addTeamData = ref({...initFormData})
 
-// 提交
+const addTeamData = ref({});
+
+const  id = route.query.id;
+//获取之前的队伍信息
+onMounted(async () => {
+  if (id <= 0){
+    showFailToast("加载队伍失败，请重试");
+    return;
+  }
+  const res = await  myAxios.get("/team/get",{
+    params: {
+      id,
+    }
+  });
+  if (res?.code === 0){
+    addTeamData.value = res.data;
+  }else {
+    showFailToast("加载队伍失败，请重试")
+  }
+})
+
+
+//提交
 const onSubmit = async () => {
   const postData = {
     ...addTeamData.value,
     status: Number(addTeamData.value.status)
   }
-  // todo 前端参数校验
-  const res = await myAxios.post("/team/add", postData);
+  //todo 前端数据校验
+  const res = await myAxios.post("/team/update",postData);
   if (res?.code === 0 && res.data){
-    showSuccessToast('添加成功');
+    showSuccessToast("更新成功");
     router.push({
-      path: '/team',
-      replace: true,
+      path:'/team',
+      replace:true,
     });
-  } else {
-    showFailToast('添加失败');
+  }else {
+    showFailToast("更新失败")
   }
 }
+
+
+
 </script>
 
 <style scoped>
-#teamPage {
 
-}
 </style>
