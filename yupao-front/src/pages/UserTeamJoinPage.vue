@@ -38,7 +38,7 @@ const listTeam = async (val = '') => {
   }
 }
 
-
+//TODO 在用户页面进行用户队伍搜索的时候有一点问题，就是搜索出来的队伍人员展示不正确=要修复
 // 页面加载时只触发一次
 onMounted( () => {
   listTeam();
