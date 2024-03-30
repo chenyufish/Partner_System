@@ -3,6 +3,7 @@ package com.yupi.usercenter.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.yupi.usercenter.common.BaseResponse;
 import com.yupi.usercenter.common.ErrorCode;
 import com.yupi.usercenter.common.ResultUtils;
@@ -204,6 +205,13 @@ public class UserController {
         }
         boolean b = userService.removeById(id);
         return ResultUtils.success(b);
+    }
+
+    @GetMapping("/match")
+    public BaseResponse<List<User>> matchUser(long num,HttpServletRequest request){
+        if(num<=0) throw  new BusinessException(ErrorCode.PARAMS_ERROR);
+        User user =userService.getLoginUser(request);
+        return ResultUtils.success(userService.matchUsers(num,user));
     }
 
 }

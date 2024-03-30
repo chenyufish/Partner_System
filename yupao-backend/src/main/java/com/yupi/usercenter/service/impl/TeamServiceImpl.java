@@ -1,7 +1,6 @@
 package com.yupi.usercenter.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yupi.usercenter.common.ErrorCode;
 import com.yupi.usercenter.exception.BusinessException;
@@ -94,7 +93,7 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team>
         }
         // 6. 超时时间 > 当前时间
         Date expireTime = team.getExpireTime();
-        if (new Date().after(expireTime)) {
+        if (expireTime != null && new Date().after(expireTime)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "超时时间 > 当前时间");
         }
         // 7. 校验用户最多创建 5 个队伍

@@ -19,6 +19,7 @@ import {onMounted, ref} from "vue";
 import {getCurrentUser} from "../servcies/user.ts";
 
 
+
 const user = ref();
 
 onMounted(async () => {

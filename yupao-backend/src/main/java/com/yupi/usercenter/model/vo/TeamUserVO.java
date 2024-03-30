@@ -1,5 +1,6 @@
 package com.yupi.usercenter.model.vo;
 
+import com.yupi.usercenter.model.vo.UserVO;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -8,12 +9,11 @@ import java.util.Date;
 /**
  * 队伍和用户信息封装类（脱敏）
  *
- * @author yupi
  */
 @Data
 public class TeamUserVO implements Serializable {
 
-    private static final long serialVersionUID = -1245616879638409405L;
+    private static final long serialVersionUID = -469224262894199159L;
 
     /**
      * id
@@ -24,6 +24,7 @@ public class TeamUserVO implements Serializable {
      * 队伍名称
      */
     private String name;
+
 
     /**
      * 描述

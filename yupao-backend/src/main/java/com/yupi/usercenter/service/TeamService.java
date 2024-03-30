@@ -1,5 +1,7 @@
 package com.yupi.usercenter.service;
 
+
+
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yupi.usercenter.model.domain.Team;
 import com.yupi.usercenter.model.domain.User;
@@ -60,6 +62,8 @@ public interface TeamService extends IService<Team> {
      * @return
      */
     boolean quitTeam(TeamQuitRequest teamQuitRequest, User loginUser);
+
+
     /**
      * 删除（解散）队伍
      *

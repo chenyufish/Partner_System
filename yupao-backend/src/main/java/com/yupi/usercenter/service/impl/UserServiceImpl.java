@@ -11,6 +11,8 @@ import com.yupi.usercenter.exception.BusinessException;
 import com.yupi.usercenter.model.domain.User;
 import com.yupi.usercenter.service.UserService;
 import com.yupi.usercenter.mapper.UserMapper;
+import com.yupi.usercenter.utils.AlgorithmUtils;
+import javafx.util.Pair;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -18,8 +20,7 @@ import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -199,12 +200,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      * @param tagNameList
      * @return
      */
-    @Override
-    public List<User> searchUsersByTags(List<String> tagNameList){
-        if (CollectionUtils.isEmpty(tagNameList)){
-            throw new BusinessException(ErrorCode.PARAMS_ERROR);
-        }
-        //这个是使用MYSQL的like语句进行查询
+    //这个是使用MYSQL的like语句进行查询
 //        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
 //        //拼接tag
 //        // like '%Java%' and like '%Python%'
@@ -213,20 +209,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 //        }
 //        List<User> userList = userMapper.selectList(queryWrapper);
 //        return  userList.stream().map(this::getSafetyUser).collect(Collectors.toList());
-        //这里是使用内存查询
-        //1.先查询所有用户
-        QueryWrapper queryWrapper = new QueryWrapper<>();
+    //这里是使用内存查询
+    @Override
+    public List<User> searchUsersByTags(List<String> tagNameList) {
+        if (CollectionUtils.isEmpty(tagNameList)) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 1. 先查询所有用户
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         List<User> userList = userMapper.selectList(queryWrapper);
         Gson gson = new Gson();
-        //2.判断内存中是否包含要求的标签
+        // 2. 在内存中判断是否包含要求的标签
         return userList.stream().filter(user -> {
-            String tagstr = user.getTags();
-            if (StringUtils.isBlank(tagstr)){
-                return false;
-            }
-            Set<String> tempTagNameSet =  gson.fromJson(tagstr,new TypeToken<Set<String>>(){}.getType());
-            for (String tagName : tagNameList){
-                if (!tempTagNameSet.contains(tagName)){
+            String tagsStr = user.getTags();
+            Set<String> tempTagNameSet = gson.fromJson(tagsStr, new TypeToken<Set<String>>() {
+            }.getType());
+            tempTagNameSet = Optional.ofNullable(tempTagNameSet).orElse(new HashSet<>());
+            for (String tagName : tagNameList) {
+                if (!tempTagNameSet.contains(tagName)) {
                     return false;
                 }
             }
@@ -279,11 +279,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return loginUser != null && loginUser.getUserRole() == UserConstant.ADMIN_ROLE;
     }
 
-    @Override
-    public List<User> matchUsers(long num, User loginUser) {
-        return null;
-    }
-
     /**
      *  获取当前用户信息
      * @param request
@@ -300,6 +295,62 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
         return (User) userObj;
     }
+    /**
+     * 推荐匹配用户
+     * @param num
+     * @param loginUser
+     * @return
+     */
+    @Override
+    public List<User> matchUsers(long num, User loginUser) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.isNotNull("tags");
+        queryWrapper.select("id","tags");
+        List<User> userList = this.list(queryWrapper);
+
+        String tags = loginUser.getTags();
+        Gson gson = new Gson();
+        List<String> tagList = gson.fromJson(tags, new TypeToken<List<String>>() {
+        }.getType());
+        // 用户列表的下表 => 相似度'
+        List<Pair<User,Long>> list = new ArrayList<>();
+        // 依次计算当前用户和所有用户的相似度
+        for (int i = 0; i <userList.size(); i++) {
+            User user = userList.get(i);
+            String userTags = user.getTags();
+            //无标签的 或当前用户为自己
+            if (StringUtils.isBlank(userTags) || user.getId() == loginUser.getId()){
+                continue;
+            }
+            List<String> userTagList = gson.fromJson(userTags, new TypeToken<List<String>>() {
+            }.getType());
+            //计算分数
+            long distance = AlgorithmUtils.minDistance(tagList, userTagList);
+            list.add(new Pair<>(user,distance));
+        }
+        //按编辑距离有小到大排序
+        List<Pair<User, Long>> topUserPairList = list.stream()
+                .sorted((a, b) -> (int) (a.getValue() - b.getValue()))
+                .limit(num)
+                .collect(Collectors.toList());
+        //有顺序的userID列表
+        List<Long> userListVo = topUserPairList.stream().map(pari -> pari.getKey().getId()).collect(Collectors.toList());
+
+        //根据id查询user完整信息
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.in("id",userListVo);
+        Map<Long, List<User>> userIdUserListMap = this.list(userQueryWrapper).stream()
+                .map(user -> getSafetyUser(user))
+                .collect(Collectors.groupingBy(User::getId));
+
+        // 因为上面查询打乱了顺序，这里根据上面有序的userID列表赋值
+        List<User> finalUserList = new ArrayList<>();
+        for (Long userId : userListVo){
+            finalUserList.add(userIdUserListMap.get(userId).get(0));
+        }
+        return finalUserList;
+    }
+
 
 }
 

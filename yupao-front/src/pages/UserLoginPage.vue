@@ -30,6 +30,7 @@ import {useRouter} from "vue-router";
 import {ref} from "vue";
 import myAxios from "../plugins/myAxios.js";
 import {showFailToast, showSuccessToast} from "vant";
+import route from "../config/route.ts";
 
 const router = useRouter();
 
@@ -42,9 +43,10 @@ const onSubmit = async () => {
     userPassword: userPassword.value,
   })
   console.log(res,'用户登录');
-  if (res.code == 0 && res.data){
+  if (res.code === 0 && res.data){
     showSuccessToast('登录成功');
-    router.replace('/')
+    const redirectUrl=route.query?.redirect as string ??'/';
+    window.location.href=redirectUrl;
   } else {
     showFailToast('登录失败')
   }

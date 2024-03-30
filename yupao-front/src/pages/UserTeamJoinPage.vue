@@ -11,7 +11,7 @@
 import {useRouter} from "vue-router";
 import TeamCardList from "../components/TeamCardList.vue";
 import {onMounted, ref} from "vue";
-import myAxios from "../plugins/myAxios";
+import myAxios from "../plugins/myAxios.js";
 import {showFailToast} from "vant";
 
 const router = useRouter();

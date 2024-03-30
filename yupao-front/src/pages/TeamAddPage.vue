@@ -22,16 +22,16 @@
             readonly
             name="datetimePicker"
             label="过期时间"
-            :placeholder="addTeamData.expireTime ?? '点击选择过期时间'"
+            :placeholder="addTeamData.expireTime??'点击选择过期时间'"
             @click="showPicker = true"
         />
-        <van-popup v-model:show="showPicker" position="bottom">
+        <van-popup v-model:show="showPicker" round position="bottom">
           <van-date-picker
-              v-model="addTeamData.expireTime"
-              @confirm="showPicker = false"
+              @change ="onChange"
+              @confirm="showPicker=false"
               type="datetime"
               title="请选择过期时间"
-              :min-date="minDate"
+              :min-date='minDate'
           />
         </van-popup>
         <van-field name="stepper" label="最大人数">
@@ -71,7 +71,7 @@
 
 import {useRouter} from "vue-router";
 import {ref} from "vue";
-import myAxios from "../plugins/myAxios";
+import myAxios from "../plugins/myAxios.js";
 import {showFailToast, showSuccessToast} from "vant";
 
 const router = useRouter();
@@ -85,15 +85,37 @@ const initFormData = {
   "maxNum": 3,
   "password": "",
   "status": 0,
+  "expireTimePlaceholder":""
 }
 
 const minDate = new Date();
+const onChange=(value:Date)=>{
+  addTeamData.value.expireTime=value;
+  addTeamData.value.expireTimePlaceholder = formatDate(value); // 更新placeholder
+};
+const formatDate = (date: Date): string => {
+  // 格式化日期为字符串，根据您的需要进行修改
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+}
+
 
 // 需要用户填写的表单数据
-const addTeamData = ref({...initFormData})
+const addTeamData = ref({
+  ...initFormData,
+  expireTime:null as Date | null,
+  expireTimePlaceholder: "" as string // 存储placeholder
+})
 
 // 提交
 const onSubmit = async () => {
+  if (!addTeamData.value.expireTime) {
+    addTeamData.value.expireTime = new Date(2050, 3, 30);
+  } else {
+    const { selectedValues } = addTeamData.value.expireTime;
+    // 将所选的日期信息转换为实际的 Date 类型
+    const [year, month, day] = selectedValues.map((value: string) => parseInt(value));
+    addTeamData.value.expireTime = new Date(year, month - 1, day);
+  }
   const postData = {
     ...addTeamData.value,
     status: Number(addTeamData.value.status)

@@ -54,8 +54,8 @@
 import {TeamType} from "../model/team";
 import {teamStatusEnum} from "../constants/team";
 import ikun from '../assets/ikun.png';
-import myAxios from "../plugins/myAxios";
-import {Dialog, showFailToast, showSuccessToast} from "vant";
+import myAxios from "../plugins/myAxios.js";
+import {showFailToast, showSuccessToast} from "vant";
 import {onMounted, ref} from "vue";
 import {getCurrentUser} from "../servcies/user.ts";
 import {useRouter} from "vue-router";
@@ -152,7 +152,7 @@ const doDeleteTeam = async (id: number) => {
   if (res?.code === 0) {
     showSuccessToast('操作成功');
   } else {
-    showFailToast('操作失败' + (res.description ? `，${res.description}` : ''));
+   showFailToast('操作失败' + (res.description ? `，${res.description}` : ''));
   }
 }
 
