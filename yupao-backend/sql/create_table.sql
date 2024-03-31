@@ -66,3 +66,18 @@ create table user_team
     isDelete     tinyint  default 0                 not null comment '是否删除'
 )
     comment '用户队伍关系';
+
+
+-- ----------------------------
+-- Table structure for follow
+-- ----------------------------
+DROP TABLE IF EXISTS `follow`;
+CREATE TABLE `follow`  (
+                           `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+                           `user_id` bigint(20) NOT NULL COMMENT '用户id',
+                           `follow_user_id` bigint(20) NOT NULL COMMENT '关注的用户id',
+                           `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                           `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                           `is_delete` tinyint(4) NULL DEFAULT 0 COMMENT '逻辑删除',
+                           PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;

@@ -1,19 +1,20 @@
-import {UserType} from "./user";
+import { UserType } from "./user";
 
-/**
- * 队伍类别
- */
 export type TeamType = {
     id: number;
     name: string;
-    description: string;
+    description: string,
+    coverImage: string,
     expireTime?: Date;
     maxNum: number;
-    password?: string,
-    // todo 定义枚举值类型，更规范
+    password?: string;
     status: number;
+    userId: number;
+    leaderName: string,
+    hasJoin: boolean;
+    hasJoinNum: number;
     createTime: Date;
     updateTime: Date;
     createUser?: UserType;
-    hasJoinNum?: number;
-};
+    joinedUserAvatars?: string[];
+}

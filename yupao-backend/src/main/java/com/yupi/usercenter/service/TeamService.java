@@ -1,75 +1,149 @@
 package com.yupi.usercenter.service;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yupi.usercenter.model.domain.Team;
 import com.yupi.usercenter.model.domain.User;
-import com.yupi.usercenter.model.dto.TeamQuery;
-import com.yupi.usercenter.model.request.TeamJoinRequest;
-import com.yupi.usercenter.model.request.TeamQuitRequest;
-import com.yupi.usercenter.model.request.TeamUpdateRequest;
+import com.yupi.usercenter.model.request.*;
 import com.yupi.usercenter.model.vo.TeamUserVO;
+import com.yupi.usercenter.model.vo.UserVO;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * 队伍服务
+ * 团队服务
  *
+ * @description 针对表【team(队伍)】的数据库操作Service
  */
 public interface TeamService extends IService<Team> {
 
     /**
-     * 创建队伍
+     * 添加团队
      *
-     * @param team
-     * @param loginUser
-     * @return
+     * @param team      团队
+     * @param loginUser 登录用户
+     * @return long
      */
+    @Transactional(rollbackFor = Exception.class)
     long addTeam(Team team, User loginUser);
 
     /**
-     * 搜索队伍
+     * 列出团队
      *
-     * @param teamQuery
-     * @param isAdmin
-     * @return
+     * @param currentPage 当前页码
+     * @param teamQuery   团队查询
+     * @param isAdmin     是否为管理员
      */
-    List<TeamUserVO> listTeams(TeamQuery teamQuery, boolean isAdmin);
+    Page<TeamUserVO> listTeams(long currentPage, TeamQueryRequest teamQuery, boolean isAdmin);
 
     /**
-     * 更新队伍
+     * 更新团队
      *
-     * @param teamUpdateRequest
-     * @param loginUser
-     * @return
+     * @param teamUpdateRequest 团队更新请求
+     * @param loginUser         登录用户
+     * @return boolean
      */
     boolean updateTeam(TeamUpdateRequest teamUpdateRequest, User loginUser);
 
     /**
-     * 加入队伍
+     * 加入团队
      *
-     * @param teamJoinRequest
-     * @return
+     * @param teamJoinRequest 团队加入请求
+     * @param loginUser       登录用户
+     * @return boolean
      */
     boolean joinTeam(TeamJoinRequest teamJoinRequest, User loginUser);
 
     /**
-     * 退出队伍
+     * 退出团队
      *
-     * @param teamQuitRequest
-     * @param loginUser
-     * @return
+     * @param teamQuitRequest 团队退出请求
+     * @param loginUser       登录用户
+     * @return boolean
      */
+    @Transactional(rollbackFor = Exception.class)
     boolean quitTeam(TeamQuitRequest teamQuitRequest, User loginUser);
 
+    /**
+     * 删除团队
+     *
+     * @param id        id
+     * @param loginUser 登录用户
+     * @param isAdmin   是否为管理员
+     * @return boolean
+     */
+    boolean deleteTeam(long id, User loginUser, boolean isAdmin);
 
     /**
-     * 删除（解散）队伍
+     * 获得团队
      *
-     * @param id
-     * @param loginUser
-     * @return
+     * @param teamId 团队id
+     * @param userId 用户id
+     * @return {@link TeamUserVO}
      */
-    boolean deleteTeam(long id, User loginUser);
+    TeamUserVO getTeam(Long teamId, Long userId);
+
+    /**
+     * 列出我加入
+     *
+     * @param currentPage 当前页码
+     * @param teamQuery   团队查询
+     * @return {@link Page}<{@link TeamUserVO}>
+     */
+    Page<TeamUserVO> listMyJoin(long currentPage, TeamQueryRequest teamQuery);
+
+    /**
+     * 获取团队成员
+     *
+     * @param teamId 团队id
+     * @param userId 用户id
+     * @return {@link List}<{@link UserVO}>
+     */
+    List<UserVO> getTeamMember(Long teamId, Long userId);
+
+    /**
+     * 列出我所有加入
+     *
+     * @param id id
+     * @return {@link List}<{@link TeamUserVO}>
+     */
+    List<TeamUserVO> listAllMyJoin(Long id);
+
+    /**
+     * 更改封面图像
+     *
+     * @param request 要求
+     * @param userId  用户id
+     * @param admin   管理
+     */
+    void changeCoverImage(TeamCoverUpdateRequest request, Long userId, boolean admin);
+
+    /**
+     * 踢出
+     *
+     * @param teamId      团队id
+     * @param userId      用户id
+     * @param loginUserId 登录用户id
+     * @param admin       管理
+     */
+    void kickOut(Long teamId, Long userId, Long loginUserId, boolean admin);
+
+    /**
+     * 列出我创建
+     *
+     * @param currentPage 当前页码
+     * @param userId      用户id
+     */
+    Page<TeamUserVO> listMyCreate(long currentPage, Long userId);
+
+    /**
+     * 获取已加入队员头像
+     *
+     * @param TeamUserVOPage 团队vo分页
+     */
+    Page<TeamUserVO> getJoinedUserAvatar(Page<TeamUserVO> TeamUserVOPage);
+
 }

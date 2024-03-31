@@ -1,18 +1,16 @@
-/**
- * 用户实体
- */
-export type UserType ={
-    id: number;
-    username :string;
-    userAccount: string;
-    avatarUrl ?:string;
-    gender :number;
-    phone :string;
-    email :string;
-    profile ?: string;
-    userStatus :string;
-    userRole :string;
-    planetCode :string;
-    tags :string[];
-    createTime: Date;
-};
+export type UserType={
+    id:number,
+    username: string,
+    userAccount: string,
+    avatarUrl?: string,
+    profile?: string,
+    gender: number,
+    phone: string,
+    email: string,
+    status: number,
+    role: number,
+    tags: string[],
+    isFollow: boolean,
+    createTime: Date,
+    updateTime: Date
+}
