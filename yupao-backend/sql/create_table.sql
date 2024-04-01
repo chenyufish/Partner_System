@@ -169,3 +169,37 @@ CREATE TABLE `team`  (
                          `is_delete` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否删除',
                          PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '队伍' ROW_FORMAT = COMPACT;
+
+-- ----------------------------
+-- Table structure for chat
+-- ----------------------------
+DROP TABLE IF EXISTS `chat`;
+CREATE TABLE `chat`  (
+                         `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '聊天记录id',
+                         `from_id` bigint(20) NOT NULL COMMENT '发送消息id',
+                         `to_id` bigint(20) NULL DEFAULT NULL COMMENT '接收消息id',
+                         `text` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+                         `chat_type` tinyint(4) NOT NULL COMMENT '聊天类型 1-私聊 2-群聊',
+                         `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                         `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP,
+                         `team_id` bigint(20) NULL DEFAULT NULL,
+                         `is_delete` tinyint(4) NULL DEFAULT 0,
+                         PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '聊天消息表' ROW_FORMAT = COMPACT;
+
+-- ----------------------------
+-- Table structure for friends
+-- ----------------------------
+DROP TABLE IF EXISTS `friends`;
+CREATE TABLE `friends`  (
+                            `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '好友申请id',
+                            `from_id` bigint(20) NOT NULL COMMENT '发送申请的用户id',
+                            `receive_id` bigint(20) NULL DEFAULT NULL COMMENT '接收申请的用户id ',
+                            `is_read` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否已读(0-未读 1-已读)',
+                            `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '申请状态 默认0 （0-未通过 1-已同意 2-已过期 3-已撤销）',
+                            `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                            `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP,
+                            `is_delete` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否删除',
+                            `remark` varchar(214) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '好友申请备注信息',
+                            PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '好友申请管理表' ROW_FORMAT = COMPACT;

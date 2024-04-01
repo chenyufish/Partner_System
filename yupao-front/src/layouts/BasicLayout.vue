@@ -35,7 +35,7 @@
   </van-tabbar>
 </template>
 <script setup>
-import {showConfirmDialog, showToast} from "vant";
+import {showConfirmDialog} from "vant";
 import {useRouter} from "vue-router";
 import routes from "../config/route.ts";
 import {ref} from "vue";
