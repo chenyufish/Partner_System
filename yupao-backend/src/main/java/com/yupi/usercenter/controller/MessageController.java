@@ -30,8 +30,6 @@ import static com.yupi.usercenter.contant.RedisConstants.MESSAGE_BLOG_NUM_KEY;
 /**
  * 消息控制器
  *
- * @author OchiaMalu
- * @date 2023/06/22
  */
 @RestController
 @RequestMapping("/message")
@@ -57,7 +55,6 @@ public class MessageController {
      * 用户是否有新消息
      *
      * @param request 请求
-     * @return {@link BaseResponse}<{@link Boolean}>
      */
     @GetMapping
     @ApiOperation(value = "用户是否有新消息")
@@ -76,7 +73,6 @@ public class MessageController {
      * 获取用户新消息数量
      *
      * @param request 请求
-     * @return {@link BaseResponse}<{@link Long}>
      */
     @GetMapping("/num")
     @ApiOperation(value = "获取用户新消息数量")
@@ -95,7 +91,6 @@ public class MessageController {
      * 获取用户点赞消息数量
      *
      * @param request 请求
-     * @return {@link BaseResponse}<{@link Long}>
      */
     @GetMapping("/like/num")
     @ApiOperation(value = "获取用户点赞消息数量")
@@ -115,7 +110,6 @@ public class MessageController {
      *
      * @param request     请求
      * @param currentPage 当前页码
-     * @return {@link BaseResponse}<{@link Page}<{@link MessageVO}>>
      */
     @GetMapping("/like")
     @ApiOperation(value = "获取用户点赞消息")
@@ -159,7 +153,6 @@ public class MessageController {
      * 获取用户博客消息
      *
      * @param request 请求
-     * @return {@link BaseResponse}<{@link List}<{@link BlogVO}>>
      */
     @GetMapping("/blog")
     @ApiOperation(value = "获取用户博客消息")

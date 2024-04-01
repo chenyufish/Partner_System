@@ -43,7 +43,7 @@ server:
         http-only: false
 mybatis-plus:
   configuration:
-    map-underscore-to-camel-case: false
+    map-underscore-to-camel-case: on
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #SQL的日志打印
   global-config:
     db-config:

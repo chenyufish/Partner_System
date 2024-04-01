@@ -14,7 +14,7 @@
       </van-swipe-item>
     </van-swipe>
     <van-tabs v-model:active="active">
-      <van-tab title="👑 匹配用户">
+      <van-tab title="匹配用户">
         <van-pull-refresh
             v-model="refreshLoading"
             success-text="刷新成功"
@@ -37,7 +37,7 @@
                      description="暂无用户"/>
         </van-pull-refresh>
       </van-tab>
-      <van-tab title="📚 热门博文">
+      <van-tab title="热门博文">
         <van-pull-refresh
             v-model="refreshLoading"
             success-text="刷新成功"
@@ -70,9 +70,9 @@
   </div>
 </template>
 <script setup>
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import myAxios from "../plugins/myAxios.js";
-import {showFailToast, showSuccessToast} from "vant";
+import {showFailToast} from "vant";
 import UserCardList from "../components/UserCardList.vue";
 import BlogCardList from "../components/BlogCardList.vue";
 

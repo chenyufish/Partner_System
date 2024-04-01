@@ -1,36 +1,65 @@
 <template>
-  <van-skeleton title avatar :row="3" :loading="props.loading" v-for="user in props.userList">
-    <van-card
-        :desc="user.profile"
-        :title="`${user.username}（${user.planetCode}）`"
-        :thumb="user.avatarUrl"
-    >
-      <template #tags>
-        <van-tag plain type="danger" v-for="tag in user.tags" style="margin-right: 8px; margin-top: 8px">
-          {{ tag }}
-        </van-tag>
-      </template>
-      <template #footer>
-        <van-button size="mini">联系我</van-button>
-      </template>
-    </van-card>
-  </van-skeleton>
+  <van-card v-for="user in userList"
+            :title="user.username"
+            :desc="user.profile"
+  >
+    <template #thumb>
+      <van-image :src="user?.avatarUrl" width="88" height="88" @click="showUserDetail(user?.id)"/>
+    </template>
+    <template #tags>
+      <van-tag v-for="tag in user?.tags" plain type="danger" style="margin-right: 8px;margin-top: 8px"
+               @click="showUserDetail(user?.id)">
+        {{ tag }}
+      </van-tag>
+    </template>
+    <template #num>
+      <van-button size="mini" plain type="primary"
+                  style="width: 48px;height: 28px;margin-top: 10px" @click="toChat(user)">
+        私聊
+      </van-button>
+    </template>
+  </van-card>
 </template>
 
 <script setup lang="ts">
 import {UserType} from "../model/user";
+import myAxios from "../plugins/myAxios.js";
+import {useRouter} from "vue-router";
 
 interface UserCardListProps {
-  loading: boolean;
-  userList: UserType[];
+  userList: UserType[]
 }
 
-const props = withDefaults(defineProps<UserCardListProps>(), {
-  loading: true,
-  // @ts-ignore
-  userList: [] as UserType[],
-});
+const props = defineProps<UserCardListProps>()
 
+const followUser = async (user) => {
+  let res = await myAxios.post("/follow/" + user.id);
+  if (res?.data.code === 0) {
+    let res_ = await myAxios.get("/user/" + user.id);
+    if (res_.data.code === 0) {
+      user.isFollow = res_.data.data.isFollow
+    }
+  }
+}
+let router = useRouter();
+const showUserDetail = (id) => {
+  router.push({
+    path: "/user/detail",
+    query: {
+      id: id
+    }
+  })
+}
+const toChat = (user) => {
+  router.push({
+    path: "/chat",
+    query: {
+      id: user.id,
+      username: user.username,
+      userType: 1
+    }
+  })
+}
 </script>
 
 <style scoped>

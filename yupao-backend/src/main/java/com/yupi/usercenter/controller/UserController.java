@@ -588,7 +588,6 @@ public class UserController {
      * 用户分页
      *
      * @param currentPage 当前页面
-     * @return {@link BaseResponse}<{@link Page}<{@link UserVO}>>
      */
     @GetMapping("/page")
     @ApiOperation(value = "用户分页")
@@ -626,7 +625,6 @@ public class UserController {
      *
      * @param id      id
      * @param request 请求
-     * @return {@link BaseResponse}<{@link UserVO}>
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "根据id获取用户")
@@ -649,7 +647,6 @@ public class UserController {
      * 获取用户标签
      *
      * @param request 请求
-     * @return {@link BaseResponse}<{@link List}<{@link String}>>
      */
     @GetMapping("/tags")
     @ApiOperation(value = "获取当前用户标签")

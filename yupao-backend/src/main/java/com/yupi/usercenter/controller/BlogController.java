@@ -32,8 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 博客控制器
  *
- * @author OchiaMalu
- * @date 2023/06/11
+
  */
 @RestController
 @RequestMapping("/blog")
@@ -58,7 +57,6 @@ public class BlogController {
      * @param currentPage 当前页面
      * @param title 题目
      * @param request     请求
-     * @return {@link BaseResponse}<{@link Page}<{@link BlogVO}>>
      */
     @GetMapping("/list")
     @ApiOperation(value = "获取博文")

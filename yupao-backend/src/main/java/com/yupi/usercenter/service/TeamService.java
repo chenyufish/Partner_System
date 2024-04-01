@@ -91,7 +91,6 @@ public interface TeamService extends IService<Team> {
      *
      * @param currentPage 当前页码
      * @param teamQuery   团队查询
-     * @return {@link Page}<{@link TeamUserVO}>
      */
     Page<TeamUserVO> listMyJoin(long currentPage, TeamQueryRequest teamQuery);
 
@@ -100,7 +99,6 @@ public interface TeamService extends IService<Team> {
      *
      * @param teamId 团队id
      * @param userId 用户id
-     * @return {@link List}<{@link UserVO}>
      */
     List<UserVO> getTeamMember(Long teamId, Long userId);
 
@@ -108,7 +106,6 @@ public interface TeamService extends IService<Team> {
      * 列出我所有加入
      *
      * @param id id
-     * @return {@link List}<{@link TeamUserVO}>
      */
     List<TeamUserVO> listAllMyJoin(Long id);
 

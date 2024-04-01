@@ -44,7 +44,7 @@
       <span class="cell-span">公共聊天室</span>
     </template>
     <template #label>
-      <span class="cell-span">SUPER速配官方聊天室</span>
+      <span class="cell-span">小黑子广场</span>
     </template>
     <template #icon>
       <div class="icon_area">
@@ -66,7 +66,6 @@
       </template>
       <template #icon>
         <van-image :src="team.coverImage || defaultImg" round width="50" height="50" style="margin-left: 10px"/>
-        <!--                    <van-icon name="volume" color="#2a2e31" class="icon" size="20px"/>-->
       </template>
     </van-cell>
   </van-cell-group>
