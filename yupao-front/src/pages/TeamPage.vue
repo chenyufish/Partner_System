@@ -44,7 +44,7 @@ import TeamCardList from "../components/TeamCardList.vue";
 import {ref} from "vue";
 import myAxios from "../plugins/myAxios.js";
 import {showConfirmDialog, showFailToast} from "vant";
-import {getCurrentUser} from "../servcies/user.ts";
+import {getCurrentUser} from "../services/user.ts";
 
 const active = ref('public')
 let router = useRouter();

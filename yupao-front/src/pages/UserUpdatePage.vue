@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import {useRouter} from "vue-router";
 import {onMounted, ref} from "vue";
-import {getCurrentUser} from "../servcies/user.ts";
+import {getCurrentUser} from "../services/user.ts";
 
 
 

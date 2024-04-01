@@ -11,8 +11,6 @@ import java.util.Date;
  * 用户vo
  * 用户签证官
  *
- * @author OchiaMalu
- * @date 2023/06/22
  */
 @Data
 @ApiModel(value = "用户返回")

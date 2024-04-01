@@ -13,10 +13,7 @@ import java.util.List;
 /**
  * 用户服务
  *
- * @author OchiaMalu
  * @description 针对表【user】的数据库操作Service
- * @createDate 2023-05-07 19:56:01
- * @date 2024/01/25
  */
 public interface UserService extends IService<User> {
     /**
@@ -34,7 +31,6 @@ public interface UserService extends IService<User> {
      * @param userAccount  用户账户
      * @param userPassword 用户暗语
      * @param request      要求
-     * @return {@link String}
      */
     String userLogin(String userAccount, String userPassword, HttpServletRequest request);
 
@@ -44,7 +40,6 @@ public interface UserService extends IService<User> {
      * @param userAccount  用户账户
      * @param userPassword 用户暗语
      * @param request      要求
-     * @return {@link String}
      */
     String adminLogin(String userAccount, String userPassword, HttpServletRequest request);
 
@@ -52,7 +47,6 @@ public interface UserService extends IService<User> {
      * 收到安全用户
      *
      * @param originUser 起源用户
-     * @return {@link User}
      */
     User getSafetyUser(User originUser);
 
@@ -126,7 +120,6 @@ public interface UserService extends IService<User> {
      *
      * @param userId      用户id
      * @param loginUserId 登录用户id
-     * @return {@link UserVO}
      */
     UserVO getUserById(Long userId, Long loginUserId);
 
@@ -134,7 +127,6 @@ public interface UserService extends IService<User> {
      * 收到用户标签
      *
      * @param id id
-     * @return {@link List}<{@link String}>
      */
     List<String> getUserTags(Long id);
 
@@ -177,7 +169,6 @@ public interface UserService extends IService<User> {
      * @param currentPage 当前页码
      * @param username    用户名
      * @param loginUser   登录用户
-     * @return {@link Page}<{@link UserVO}>
      */
     Page<UserVO> preMatchUser(long currentPage, String username, User loginUser);
 
@@ -187,7 +178,6 @@ public interface UserService extends IService<User> {
      * @param key     钥匙
      * @param userId  用户id
      * @param request 要求
-     * @return {@link String}
      */
     String afterInsertUser(String key, long userId, HttpServletRequest request);
 
@@ -196,7 +186,6 @@ public interface UserService extends IService<User> {
      *
      * @param userRegisterRequest 用户登记要求
      * @param request             要求
-     * @return {@link Long}
      */
     Long adminRegister(UserRegisterRequest userRegisterRequest, HttpServletRequest request);
 

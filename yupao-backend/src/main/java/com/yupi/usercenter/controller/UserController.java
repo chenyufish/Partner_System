@@ -87,7 +87,6 @@ public class UserController {
      * 发送消息
      *
      * @param phone 电话
-     * @return {@link BaseResponse}<{@link String}>
      */
     @GetMapping("/message")
     @ApiOperation(value = "发送验证码")
@@ -113,7 +112,6 @@ public class UserController {
      *
      * @param phone   电话
      * @param request 请求
-     * @return {@link BaseResponse}<{@link String}>
      */
     @GetMapping("/message/update/phone")
     @ApiOperation(value = "发送手机号更新验证码")
@@ -199,7 +197,6 @@ public class UserController {
      *
      * @param userRegisterRequest 用户注册请求
      * @param request             要求
-     * @return {@link BaseResponse}<{@link Long}>
      */
     @PostMapping("/admin/register")
     @ApiOperation(value = "管理员新增用户")
@@ -217,7 +214,6 @@ public class UserController {
      *
      * @param userLoginRequest 用户登录请求
      * @param request          请求
-     * @return {@link BaseResponse}<{@link User}>
      */
     @PostMapping("/login")
     @ApiOperation(value = "用户登录")
@@ -317,7 +313,6 @@ public class UserController {
      *
      * @param phone 电话
      * @param code  代码
-     * @return {@link BaseResponse}<{@link String}>
      */
     @GetMapping("/check")
     @ApiOperation(value = "校验验证码")
@@ -340,7 +335,6 @@ public class UserController {
      * 更新密码
      *
      * @param updatePasswordRequest 更新密码请求
-     * @return {@link BaseResponse}<{@link String}>
      */
     @PutMapping("/forget")
     @ApiOperation(value = "修改密码")
@@ -381,7 +375,6 @@ public class UserController {
      * 管理系统获取当前用户
      *
      * @param request 请求
-     * @return {@link BaseResponse}<{@link User}>
      */
     @GetMapping("/admin/current")
     @ApiOperation(value = "管理系统获取当前用户")

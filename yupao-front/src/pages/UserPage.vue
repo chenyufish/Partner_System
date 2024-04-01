@@ -71,7 +71,7 @@ import {useRouter} from "vue-router";
 import {onMounted, ref} from "vue";
 import myAxios from "../plugins/myAxios.js";
 import {showFailToast, showSuccessToast} from "vant";
-import {getCurrentUser} from "../servcies/user.ts";
+import {getCurrentUser} from "../services/user.ts";
 
 let router = useRouter();
 const user = ref()

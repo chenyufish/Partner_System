@@ -61,7 +61,7 @@ import { teamStatusEnum } from "../constants/team.ts";
 import defaultImg from "/public/defalutTeamImg.jpg";
 import myAxios from "../plugins/myAxios.js";
 import { showConfirmDialog, showFailToast, showSuccessToast } from "vant";
-import { getCurrentUser } from "../servcies/user.ts";
+import { getCurrentUser } from "../services/user.ts";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 

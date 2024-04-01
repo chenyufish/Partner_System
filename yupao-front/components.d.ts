@@ -8,12 +8,18 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     BlogCardList: typeof import('./src/components/BlogCardList.vue')['default']
+    CommentList: typeof import('./src/components/CommentList.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    MessageDefaultGrid: typeof import('./src/components/MessageDefaultGrid.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TeamCardList: typeof import('./src/components/TeamCardList.vue')['default']
+    TeamMemberCardList: typeof import('./src/components/TeamMemberCardList.vue')['default']
     UserCardList: typeof import('./src/components/UserCardList.vue')['default']
+    UserCommentList: typeof import('./src/components/UserCommentList.vue')['default']
+    UserLikeList: typeof import('./src/components/UserLikeList.vue')['default']
     VanBackTop: typeof import('vant/es')['BackTop']
+    VanBadge: typeof import('vant/es')['Badge']
     VanButton: typeof import('vant/es')['Button']
     VanCalendar: typeof import('vant/es')['Calendar']
     VanCard: typeof import('vant/es')['Card']
@@ -35,6 +41,9 @@ declare module 'vue' {
     VanLoading: typeof import('vant/es')['Loading']
     VanNavBar: typeof import('vant/es')['NavBar']
     VanNoticeBar: typeof import('vant/es')['NoticeBar']
+    VanNumberKeyboard: typeof import('vant/es')['NumberKeyboard']
+    VanOverlay: typeof import('vant/es')['Overlay']
+    VanPasswordInput: typeof import('vant/es')['PasswordInput']
     VanPopup: typeof import('vant/es')['Popup']
     VanPullRefresh: typeof import('vant/es')['PullRefresh']
     VanRadio: typeof import('vant/es')['Radio']
@@ -46,6 +55,7 @@ declare module 'vue' {
     VanSkeletonParagraph: typeof import('vant/es')['SkeletonParagraph']
     VanSpace: typeof import('vant/es')['Space']
     VanStepper: typeof import('vant/es')['Stepper']
+    VanSticky: typeof import('vant/es')['Sticky']
     VanSwipe: typeof import('vant/es')['Swipe']
     VanSwipeItem: typeof import('vant/es')['SwipeItem']
     VanSwitch: typeof import('vant/es')['Switch']
@@ -56,5 +66,6 @@ declare module 'vue' {
     VanTag: typeof import('vant/es')['Tag']
     VanTextEllipsis: typeof import('vant/es')['TextEllipsis']
     VanTreeSelect: typeof import('vant/es')['TreeSelect']
+    VanUploader: typeof import('vant/es')['Uploader']
   }
 }

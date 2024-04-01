@@ -19,7 +19,7 @@
 import {useRoute, useRouter} from "vue-router"
 import myAxios from "../plugins/myAxios.js";
 import {showFailToast, showSuccessToast} from "vant";
-import {getCurrentUser} from "../servcies/user";
+import {getCurrentUser} from "../services/user";
 import {ref} from "vue";
 
 const router = useRouter();

@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import {BlogType} from "../model/blog.js";
 import {useRouter} from "vue-router";
-import {getCurrentUser} from "../servcies/user.ts";
+import {getCurrentUser} from "../services/user.ts";
 import {showFailToast} from "vant";
 
 interface BlogCardListProps {

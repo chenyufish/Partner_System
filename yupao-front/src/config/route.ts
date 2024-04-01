@@ -1,31 +1,56 @@
-// 定义一些路由
 import Index from "../pages/Index.vue";
 import Team from "../pages/TeamPage.vue";
-import UserPage from "../pages/UserPage.vue";
+import User from "../pages/UserPage.vue";
+import Search from "../pages/SearchPage.vue";
+import EditUser from "../pages/UserEditPage.vue";
+import SearchResult from "../pages/SearchResultPage.vue";
+import UserLogin from "../pages/UserLoginPage.vue";
+import TeamAddPage from "../pages/TeamAddPage.vue";
+import TeamUpdatePage from "../pages/TeamUpdatePage.vue";
 import UserUpdatePage from "../pages/UserUpdatePage.vue";
 import UserTeamJoinPage from "../pages/UserTeamJoinPage.vue";
 import UserTeamCreatePage from "../pages/UserTeamCreatePage.vue";
-import SearchPage from "../pages/SearchPage.vue";
-import SearchResultPage from "../pages/SearchResultPage.vue";
-import UserEditPage from "../pages/UserEditPage.vue";
-import UserLoginPage from "../pages/UserLoginPage.vue";
-import TeamAddPage from "../pages/TeamAddPage.vue";
-import TeamUpdatePage from "../pages/TeamUpdatePage.vue";
-
+import SignUpPage from "../pages/SignUpPage.vue";
+import BlogEditPage from "../pages/BlogEditPage.vue";
+import MessagePage from "../pages/MassagePage.vue";
+import TeamDetailPage from "../pages/TeamDetailPage.vue";
+import BlogPage from "../pages/BlogPage.vue";
+import ForgetPasswordPage from "../pages/ForgetPasswordPage.vue";
+import AfterSignUp from "../pages/AfterSignUp.vue";
+import ChatPage from "../pages/ChatPage.vue";
+import UserFollowPage from "../pages/UserFollowPage.vue";
+import UserBlogCommentPage from "../pages/UserBlogCommentPage.vue";
+import UserFansPage from "../pages/UserFansPage.vue";
+import UserLikePage from "../pages/UserLikePage.vue";
+import UserFollowedUserPage from "../pages/UserFollowUserPage.vue";
+import UpdatePasswordPage from "../pages/UpdatePasswordPage.vue";
 
 const routes = [
-    { path: '/', component: Index },
-    { path: '/team', title: '找队伍', component: Team },
-    { path: '/team/add', title: '创建队伍', component: TeamAddPage },
-    { path: '/team/update', title: '更新队伍', component: TeamUpdatePage },
-    { path: '/user', title: '个人信息', component: UserPage },
-    { path: '/search', title: '找伙伴', component: SearchPage },
-    { path: '/user/list', title: '用户列表', component: SearchResultPage },
-    { path: '/user/edit', title: '编辑信息', component: UserEditPage },
-    { path: '/user/login', title: '登录', component: UserLoginPage },
-    { path: '/user/update', title: '更新信息', component: UserUpdatePage },
-    { path: '/user/team/join', title: '加入队伍', component: UserTeamJoinPage },
-    { path: '/user/team/create', title: '创建队伍', component: UserTeamCreatePage },
+    {path: '/', title: "速配SUPER", component: Index},
+    {path: '/search', title: "搜索", component: Search},
+    {path: '/search/userList', title: "搜索到的用户", component: SearchResult},
+    {path: '/team', title: "队伍", component: Team},
+    {path: '/team/detail', title: '队伍详情', component: TeamDetailPage},
+    {path: '/team/add', title: "创建队伍", component: TeamAddPage},
+    {path: '/team/update', title: "更新队伍", component: TeamUpdatePage},
+    {path: '/user', title: "个人", component: User},
+    {path: '/user/signup', component: SignUpPage},
+    {path: '/after', title: '标签', component: AfterSignUp, meta: {layout: 'after'}},
+    {path: '/user/login', title: "用户登录", component: UserLogin},
+    {path: '/user/edit', title: "修改用户", component: EditUser},
+    {path: '/user/update', title: "修改用户", component: UserUpdatePage},
+    {path: '/user/team/join', title: "我加入的队伍", component: UserTeamJoinPage},
+    {path: '/user/team/create', title: "我创建的队伍", component: UserTeamCreatePage},
+    {path: '/blog', component: BlogPage, meta: {layout: 'blog'}},
+    {path: '/blog/edit', title: '博文编辑', component: BlogEditPage, meta: {layout: 'blog-edit'}},
+    {path: '/message', title: '消息中心', component: MessagePage},
+    {path: '/forget', title: '找回密码', component: ForgetPasswordPage, meta: {layout: 'forget'}},
+    {path: '/chat', component: ChatPage, meta: {layout: 'chat'}},
+    {path: '/user/follow', title: '我关注的用户', component: UserFollowPage},
+    {path: '/user/comment', title: '我评论的', component: UserBlogCommentPage},
+    {path: '/fans', title: '我的粉丝', component: UserFansPage},
+    {path: '/user/like', title: '赞', component: UserLikePage},
+    {path: '/user/follow/blog', title: '关注', component: UserFollowedUserPage},
+    {path: '/update/password', title: '修改密码', component: UpdatePasswordPage, meta: {layout: 'password'}}
 ]
-
 export default routes;
