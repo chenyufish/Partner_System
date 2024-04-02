@@ -1,65 +1,100 @@
 <template>
-  <div id="teamPage">
-    <van-search v-model="searchText" placeholder="搜索队伍" @search="onSearch" />
-    <van-button type="primary" @click="doJoinTeam">创建队伍</van-button>
-    <team-card-list :teamList="teamList" />
-    <van-empty v-if="teamList?.length < 1" description="数据为空"/>
-  </div>
+  <van-search v-model="searchText" placeholder="搜索队伍" @search="onSearch"/>
+  <van-pull-refresh
+      v-model="refreshLoading"
+      success-text="刷新成功"
+      @refresh="onRefresh"
+  >
+    <van-list
+        v-model:loading="listLoading"
+        :finished="listFinished"
+        offset="0"
+        finished-text="没有更多了"
+        @load="onLoad"
+    >
+      <template #loading>
+        <van-skeleton>
+          <template #template>
+            <div :style="{ display: 'flex', width: '100%' }">
+              <van-skeleton-image/>
+              <div :style="{ flex: 1, marginLeft: '16px' }">
+                <van-skeleton-paragraph row-width="60%"/>
+                <van-skeleton-paragraph/>
+                <van-skeleton-paragraph/>
+                <van-skeleton-paragraph/>
+              </div>
+            </div>
+          </template>
+        </van-skeleton>
+      </template>
+      <TeamCardList :team-list="teamList" @refresh="onRefresh"/>
+    </van-list>
+  </van-pull-refresh>
+  <van-empty v-if="teamList?.length<1 && !listLoading" description="数据为空"/>
 </template>
 
 <script setup lang="ts">
-
 import {useRouter} from "vue-router";
 import TeamCardList from "../components/TeamCardList.vue";
-import {onMounted, ref} from "vue";
-import myAxios from "../plugins/myAxios";
+import {ref} from "vue";
+import myAxios from "../plugins/myAxios.js";
 import {showFailToast} from "vant";
 
-const router = useRouter();
-const searchText = ref('');
+let router = useRouter();
+const searchText = ref("")
 
-// 跳转到加入队伍页
-const doJoinTeam = () => {
-  router.push({
-    path: "/team/add"
-  })
+const refreshLoading = ref(false)
+const listLoading = ref(false)
+const listFinished = ref(false)
+const currentPage = ref(0)
+const doAddTeam = () => {
+  router.push("/team/add")
 }
-
-const teamList = ref([]);
+const teamList = ref([])
 
 /**
  * 搜索队伍
  * @param val
  * @returns {Promise<void>}
  */
-const listTeam = async (val = '') => {
-  const res = await myAxios.get("/team/list/my/create", {
-    params: {
-      searchText: val,
-      pageNum: 1,
-    },
-  });
-  if (res?.code === 0) {
-    teamList.value = res.data;
-  } else {
-    showFailToast('加载队伍失败，请刷新重试');
-  }
+const onSearch = async (val) => {
+  teamList.value = []
+  currentPage.value = 1
+  await listTeams(currentPage.value, val)
 }
 
 
-// 页面加载时只触发一次
-onMounted( () => {
-  listTeam();
-})
+async function listTeams(currentPage, val = '') {
+  listLoading.value = true
+  const res = await myAxios.get("/team/list/my/create?currentPage=" + currentPage + "&searchText=" + val)
+  if (res?.data.code === 0) {
+    if (res.data.data.records.length === 0) {
+      listFinished.value = true
+      return
+    } else {
+      res.data.data.records.forEach(team => teamList.value.push(team))
+    }
+  } else {
+    showFailToast("队伍加载失败，请稍后重试")
+  }
+  listLoading.value = false
+}
 
-const onSearch = (val) => {
-  listTeam(val);
-};
+const onLoad = async () => {
+  currentPage.value++
+  await listTeams(currentPage.value)
+  // onLoading.value=false
+}
 
+const onRefresh = async () => {
+  teamList.value = []
+  listFinished.value = false
+  currentPage.value = 1
+  await listTeams(currentPage.value)
+  refreshLoading.value = false
+}
 </script>
 
 <style scoped>
-#teamPage {
 
-}
 </style>

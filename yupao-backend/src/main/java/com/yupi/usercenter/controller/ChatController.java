@@ -52,7 +52,6 @@ public class ChatController {
      *
      * @param chatRequest 聊天请求
      * @param request     请求
-     * @return {@link BaseResponse}<{@link List}<{@link ChatMessageVO}>>
      */
     @PostMapping("/privateChat")
     @ApiOperation(value = "获取私聊")
@@ -79,7 +78,6 @@ public class ChatController {
      *
      * @param chatRequest 聊天请求
      * @param request     请求
-     * @return {@link BaseResponse}<{@link List}<{@link ChatMessageVO}>>
      */
     @PostMapping("/teamChat")
     @ApiOperation(value = "获取队伍聊天")
@@ -105,7 +103,6 @@ public class ChatController {
      * 大厅聊天
      *
      * @param request 请求
-     * @return {@link BaseResponse}<{@link List}<{@link ChatMessageVO}>>
      */
     @GetMapping("/hallChat")
     @ApiOperation(value = "获取大厅聊天")

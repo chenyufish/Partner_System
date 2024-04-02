@@ -32,8 +32,6 @@ import java.util.List;
 /**
  * 博文评论控制器
  *
- * @author OchiaMalu
- * @date 2023/06/11
  */
 @RestController
 @RequestMapping("/comments")

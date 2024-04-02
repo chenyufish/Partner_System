@@ -29,7 +29,7 @@ import UpdatePasswordPage from "../pages/UpdatePasswordPage.vue";
 import UserFollowUserPage from "../pages/UserFollowUserPage.vue";
 
 const routes = [
-    {path: '/', title: "速配SUPER", component: Index},
+    {path: '/', title: "小黑子匹配", component: Index},
     {path: '/search', title: "搜索", component: Search},
     {path: '/search/userList', title: "搜索到的用户", component: SearchResult},
     {path: '/team', title: "队伍", component: Team},

@@ -39,7 +39,7 @@ public class TeamAddRequest implements Serializable {
      * 过期时间
      */
     @ApiModelProperty(value = "过期时间")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date expireTime;
 
     /**

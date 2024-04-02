@@ -103,7 +103,6 @@ public interface UserService extends IService<User> {
      * 是登录名
      *
      * @param request 要求
-     * @return {@link Boolean}
      */
     Boolean isLogin(HttpServletRequest request);
 

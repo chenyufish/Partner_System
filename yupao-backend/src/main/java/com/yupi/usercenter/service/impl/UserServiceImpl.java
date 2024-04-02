@@ -262,7 +262,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * 用户脱敏
      *
      * @param originUser 起源用户
-     * @return {@link User}
      */
     @Override
     public User getSafetyUser(User originUser) {

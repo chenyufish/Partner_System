@@ -454,7 +454,6 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team> implements Te
      *
      * @param currentPage 当前页面
      * @param teamQuery   团队查询
-     * @return {@link Page}<{@link TeamUserVO}>
      */
     @Override
     public Page<TeamUserVO> listMyJoin(long currentPage, TeamQueryRequest teamQuery) {
@@ -469,7 +468,6 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team> implements Te
      *
      * @param currentPage            当前页码
      * @param teamLambdaQueryWrapper 团队lambda查询包装器
-     * @return {@link Page}<{@link TeamUserVO}>
      */
     public Page<TeamUserVO> listTeamByCondition(long currentPage, LambdaQueryWrapper<Team> teamLambdaQueryWrapper) {
         Page<Team> teamPage = this.page(new Page<>(currentPage, PAGE_SIZE), teamLambdaQueryWrapper);
@@ -506,7 +504,6 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team> implements Te
      *
      * @param teamId 团队id
      * @param userId 用户id
-     * @return {@link List}<{@link UserVO}>
      */
     @Override
     public List<UserVO> getTeamMember(Long teamId, Long userId) {
@@ -536,7 +533,6 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team> implements Te
      * 列出所有我加入
      *
      * @param id id
-     * @return {@link List}<{@link TeamUserVO}>
      */
     @Override
     public List<TeamUserVO> listAllMyJoin(Long id) {
@@ -654,7 +650,6 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team> implements Te
      * 根据 id 获取队伍信息
      *
      * @param teamId 团队id
-     * @return {@link Team}
      */
     private Team getTeamById(Long teamId) {
         if (teamId == null || teamId <= 0) {

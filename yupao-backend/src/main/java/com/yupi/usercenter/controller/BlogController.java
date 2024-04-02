@@ -77,7 +77,6 @@ public class BlogController {
      *
      * @param blogAddRequest 博客添加请求
      * @param request        请求
-     * @return {@link BaseResponse}<{@link String}>
      */
     @PostMapping("/add")
     @ApiOperation(value = "添加博文")
@@ -101,7 +100,6 @@ public class BlogController {
      *
      * @param currentPage 当前页面
      * @param request     请求
-     * @return {@link BaseResponse}<{@link Page}<{@link BlogVO}>>
      */
     @GetMapping("/list/my/blog")
     @ApiOperation(value = "获取我写的博文")
@@ -122,7 +120,6 @@ public class BlogController {
      *
      * @param id      id
      * @param request 请求
-     * @return {@link BaseResponse}<{@link String}>
      */
     @PutMapping("/like/{id}")
     @ApiOperation(value = "点赞博文")
@@ -143,7 +140,6 @@ public class BlogController {
      *
      * @param id      id
      * @param request 请求
-     * @return {@link BaseResponse}<{@link BlogVO}>
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "根据id获取博文")
@@ -166,7 +162,6 @@ public class BlogController {
      *
      * @param id      id
      * @param request 请求
-     * @return {@link BaseResponse}<{@link String}>
      */
     @DeleteMapping("/{id}")
     @ApiOperation(value = "根据id删除博文")
@@ -191,7 +186,6 @@ public class BlogController {
      *
      * @param blogUpdateRequest 博客更新请求
      * @param request           请求
-     * @return {@link BaseResponse}<{@link String}>
      */
     @PutMapping("/update")
     @ApiOperation(value = "更新博文")

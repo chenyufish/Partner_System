@@ -71,7 +71,6 @@ public class TeamController {
      *
      * @param teamAddRequest 团队添加请求
      * @param request        请求
-     * @return {@link BaseResponse}<{@link Long}>
      */
     @PostMapping("/add")
     @ApiOperation(value = "添加队伍")
@@ -97,7 +96,6 @@ public class TeamController {
      *
      * @param teamUpdateRequest 团队更新请求
      * @param request           请求
-     * @return {@link BaseResponse}<{@link Boolean}>
      */
     @PostMapping("/update")
     @ApiOperation(value = "更新队伍")
@@ -146,7 +144,6 @@ public class TeamController {
      * @param currentPage      当前页面
      * @param teamQueryRequest 团队查询请求
      * @param request          请求
-     * @return {@link BaseResponse}<{@link Page}<{@link TeamUserVO}>>
      */
     @GetMapping("/list")
     @ApiOperation(value = "获取队伍列表")
@@ -215,7 +212,6 @@ public class TeamController {
      *
      * @param deleteRequest 删除请求
      * @param request       请求
-     * @return {@link BaseResponse}<{@link Boolean}>
      */
     @PostMapping("/delete")
     @ApiOperation(value = "解散队伍")
@@ -244,7 +240,6 @@ public class TeamController {
      * @param currentPage 当前页面
      * @param teamQuery   团队查询
      * @param request     请求
-     * @return {@link BaseResponse}<{@link Page}<{@link TeamUserVO}>>
      */
     @GetMapping("/list/my/create")
     @ApiOperation(value = "获取我创建的队伍")
@@ -402,7 +397,6 @@ public class TeamController {
      *
      * @param loginUser 登录用户
      * @param teamPage  团队页面
-     * @return {@link BaseResponse}<{@link Page}<{@link TeamUserVO}>>
      */
     private BaseResponse<Page<TeamUserVO>> getUserJoinedList(User loginUser, Page<TeamUserVO> teamPage) {
         try {
@@ -425,7 +419,6 @@ public class TeamController {
      * 获取队伍已加入人数
      *
      * @param TeamUserVOPage TeamUserVOPage
-     * @return {@link Page}<{@link TeamUserVO}>
      */
     private Page<TeamUserVO> getTeamHasJoinNum(Page<TeamUserVO> TeamUserVOPage) {
         List<TeamUserVO> teamList = TeamUserVOPage.getRecords();

@@ -138,7 +138,6 @@ public class UserController {
      *
      * @param email   电子邮件
      * @param request 请求
-     * @return {@link BaseResponse}<{@link String}>
      * @throws MessagingException 通讯异常
      */
     @GetMapping("/message/update/email")
@@ -177,7 +176,6 @@ public class UserController {
      *
      * @param userRegisterRequest 用户注册请求
      * @param request             要求
-     * @return {@link BaseResponse}<{@link String}>
      */
     @PostMapping("/register")
     @ApiOperation(value = "用户注册")
@@ -238,7 +236,6 @@ public class UserController {
      *
      * @param userLoginRequest 用户登录请求
      * @param request          请求
-     * @return {@link BaseResponse}<{@link User}>
      */
     @PostMapping("/admin/login")
     @ApiOperation(value = "用户登录")
@@ -263,7 +260,6 @@ public class UserController {
      * 用户注销
      *
      * @param request 请求
-     * @return {@link BaseResponse}<{@link Integer}>
      */
     @PostMapping("/logout")
     @ApiOperation(value = "用户登出")
@@ -281,7 +277,6 @@ public class UserController {
      * 获取用户通过电话
      *
      * @param phone 电话
-     * @return {@link BaseResponse}<{@link String}>
      */
     @GetMapping("/forget")
     @ApiOperation(value = "通过手机号查询用户")
@@ -398,7 +393,6 @@ public class UserController {
      *
      * @param id      id
      * @param request 请求
-     * @return {@link BaseResponse}<{@link Boolean}>
      */
     @DeleteMapping("/delete")
     @ApiOperation(value = "删除用户")
@@ -428,7 +422,6 @@ public class UserController {
      *
      * @param id      用户ID
      * @param request 请求
-     * @return {@link BaseResponse}<{@link Long}>
      */
     @GetMapping("/ban")
     @ApiOperation(value = "封禁")
@@ -459,7 +452,6 @@ public class UserController {
      * @param tagNameList 标记名称列表
      * @param currentPage 当前页面
      * @param request     要求
-     * @return {@link BaseResponse}<{@link Page}<{@link User}>>
      */
     @GetMapping("/search/tags")
     @ApiOperation(value = "通过标签搜索用户")
@@ -485,7 +477,6 @@ public class UserController {
      * @param username    用户名
      * @param request     请求
      * @param currentPage 当前页码
-     * @return {@link BaseResponse}<{@link Page}<{@link User}>>
      */
     @GetMapping("/search")
     @ApiOperation(value = "通过用户名搜索用户")
@@ -516,7 +507,6 @@ public class UserController {
      *
      * @param updateRequest 更新请求
      * @param request       请求
-     * @return {@link BaseResponse}<{@link String}>
      */
     @PutMapping("/update")
     @ApiOperation(value = "更新用户")
@@ -554,7 +544,6 @@ public class UserController {
      *
      * @param updateRequest 更新请求
      * @param request       请求
-     * @return {@link BaseResponse}<{@link String}>
      */
     @PutMapping("/admin/update")
     @ApiOperation(value = "管理员更新用户")
@@ -666,7 +655,6 @@ public class UserController {
      *
      * @param tags    标签
      * @param request 请求
-     * @return {@link BaseResponse}<{@link String}>
      */
     @PutMapping("/update/tags")
     @ApiOperation(value = "更新用户标签")

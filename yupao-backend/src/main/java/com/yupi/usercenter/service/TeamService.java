@@ -16,7 +16,6 @@ import java.util.List;
 /**
  * 团队服务
  *
- * @description 针对表【team(队伍)】的数据库操作Service
  */
 public interface TeamService extends IService<Team> {
 

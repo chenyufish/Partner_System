@@ -1,5 +1,6 @@
 package com.yupi.usercenter.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yupi.usercenter.model.vo.UserVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,9 +13,7 @@ import java.util.List;
 /**
  * 团队签证官
  *
- * @author OchiaMalu
- * @date 2023/06/22
- */
+*/
 @Data
 @ApiModel(value = "队伍返回")
 public class TeamUserVO implements Serializable {
@@ -53,6 +52,7 @@ public class TeamUserVO implements Serializable {
      * 过期时间
      */
     @ApiModelProperty(value = "过期时间")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date expireTime;
 
     /**

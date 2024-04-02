@@ -1,5 +1,6 @@
 package com.yupi.usercenter.model.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -33,6 +34,7 @@ public class TeamUpdateRequest implements Serializable {
     /**
      * 过期时间
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date expireTime;
 
     /**
