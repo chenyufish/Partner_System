@@ -47,7 +47,7 @@ public class FileController {
     /**
      * 基本路径
      */
-    @Value("${super.img}")
+    @Value("${fishman.img}")
     private String basePath;
 
     /**
@@ -59,7 +59,7 @@ public class FileController {
     @Resource
     private FishmanProperties fishmanProperties;
 
-    @Value("${super.qiniu.url:null}")
+    @Value("${fishman.qiniu.url:null}")
     private String qiniuUrl;
 
     @Value("${server.servlet.session.cookie.domain}")

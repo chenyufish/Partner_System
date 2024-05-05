@@ -13,15 +13,15 @@ public final class BloomFilterConstants {
     /**
      * 用户布隆前缀
      */
-    public static final String USER_BLOOM_PREFIX = "super:user:id:";
+    public static final String USER_BLOOM_PREFIX = "fishman:user:id:";
     /**
      * 队伍布隆前缀
      */
-    public static final String TEAM_BLOOM_PREFIX = "super:team:id:";
+    public static final String TEAM_BLOOM_PREFIX = "fishman:team:id:";
     /**
      * 博客布隆前缀
      */
-    public static final String BLOG_BLOOM_PREFIX = "super:blog:id:";
+    public static final String BLOG_BLOOM_PREFIX = "fishman:blog:id:";
 
     /**
      * 预先打开的最大包含记录

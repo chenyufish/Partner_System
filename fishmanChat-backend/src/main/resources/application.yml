@@ -15,9 +15,9 @@ spring:
     time-zone: GMT+8
     date-format: java.text.SimpleDateFormat
   mail:
-    host: host
-    username: username
-    password: password
+    host: smtp.163.com
+    username: cy13692810010@163.com
+    password: 7894561230chenyu
   servlet:
     multipart:
       max-file-size: 10MB
@@ -63,7 +63,7 @@ knife4j:
         group-name: fishmanChat
         api-rule: package
         api-rule-resources:
-          - com.yupi.usercenter.controller
+          - com.fishman.usercenter.controller
 fishman:
   img: /img/
   job: "0 0 0 * * ? *"

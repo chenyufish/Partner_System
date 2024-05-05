@@ -56,7 +56,7 @@ public class BlogCommentsServiceImpl extends ServiceImpl<BlogCommentsMapper, Blo
     @Resource
     private RedissonClient redissonClient;
 
-    @Value("${super.qiniu.url:null}")
+    @Value("${fishman.qiniu.url:null}")
     private String qiniuUrl;
 
     @Override

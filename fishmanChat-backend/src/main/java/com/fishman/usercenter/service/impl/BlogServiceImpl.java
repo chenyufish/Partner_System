@@ -64,7 +64,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog>
     @Resource
     private FishmanProperties fishmanProperties;
 
-    @Value("${super.qiniu.url:null}")
+    @Value("${fishman.qiniu.url:null}")
     private String qiniuUrl;
 
     @Value("${server.servlet.session.cookie.domain}")

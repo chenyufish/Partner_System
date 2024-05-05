@@ -21,7 +21,7 @@ public class QuartzConfig {
     /**
      * 工作触发时间
      */
-    @Value("${super.job}")
+    @Value("${fishman.job}")
     private String jobTriggerTime;
 
     /**

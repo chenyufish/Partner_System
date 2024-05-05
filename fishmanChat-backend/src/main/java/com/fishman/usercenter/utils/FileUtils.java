@@ -141,7 +141,7 @@ public class FileUtils {
      *
      * @param b b
      */
-    @Value("${super.img}")
+    @Value("${fishman.img}")
     public void initBasePath(String b) {
         basePath = b;
     }
