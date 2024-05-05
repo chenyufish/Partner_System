@@ -22,7 +22,7 @@ public final class RedisConstants {
     /**
      * 用户更新电话键
      */
-    public static final String USER_UPDATE_PHONE_KEY = "suer:user:update:phone:";
+    public static final String USER_UPDATE_PHONE_KEY = "fishmanon:user:update:phone:";
     /**
      * 用户更新电话过期时间
      */
@@ -30,7 +30,7 @@ public final class RedisConstants {
     /**
      * 用户更新邮件键
      */
-    public static final String USER_UPDATE_EMAIL_KEY = "suer:user:update:email:";
+    public static final String USER_UPDATE_EMAIL_KEY = "fishmanon:user:update:email:";
     /**
      * 用户更新邮件过期时间
      */

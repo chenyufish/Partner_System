@@ -162,7 +162,7 @@ public class UserController {
         mimeMessageHelper.setSubject("SUPER 验证码");
         mimeMessageHelper.setText("我们收到了一项请求，要求更新您的邮箱地址为"
                 + email + "。本次操作的验证码为："
-                + code + "。如果您并未请求此验证码，则可能是他人正在尝试修改以下 SUPER 帐号："
+                + code + "。如果您并未请求此验证码，则可能是他人正在尝试修改帐号："
                 + loginUser.getUserAccount() + "。请勿将此验证码转发给或提供给任何人。");
         javaMailSender.send(mimeMessage);
         String key = USER_UPDATE_EMAIL_KEY + email;
