@@ -30,7 +30,7 @@
           v-model="code"
           required
           label="验证码"
-          placeholder="请输入验证码"
+          placeholder="请输入验证码：123456"
           :rules="[{ required: true, message: '请填写验证码' }]"
       />
       <van-field

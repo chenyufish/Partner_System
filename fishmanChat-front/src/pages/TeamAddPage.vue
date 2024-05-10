@@ -29,7 +29,7 @@
           @click="showCalendar = true"
       />
       <van-calendar v-model:show="showCalendar" @confirm="onConfirm" />
-      <van-field name="stepper" label="请选择人数">
+      <van-field name="stepper" label="队伍最大人数">
         <template #input>
           <van-stepper v-model="addTeamData.maxNum" max="10" />
         </template>

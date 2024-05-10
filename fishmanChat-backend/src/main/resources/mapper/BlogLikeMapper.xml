@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yupi.usercenter.mapper.BlogLikeMapper">
+<mapper namespace="com.fishman.fishmanChat.mapper.BlogLikeMapper">
 
-    <resultMap id="BaseResultMap" type="com.fishman.usercenter.model.domain.BlogLike">
+    <resultMap id="BaseResultMap" type="com.fishman.fishmanChat.model.domain.BlogLike">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="blogId" column="blog_id" jdbcType="BIGINT"/>
         <result property="userId" column="user_id" jdbcType="BIGINT"/>

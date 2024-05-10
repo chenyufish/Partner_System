@@ -54,18 +54,18 @@ knife4j:
   enable: true
   openapi:
     title: 接口文档
-    description: "用户匹配系统"
+    description: "小黑子匹配系统"
     email: cy13692810010@163.com
     version: v2.0.0
     concat: fishman
     group:
-      yupao:
+      fishmanChat:
         group-name: fishmanChat
         api-rule: package
         api-rule-resources:
-          - com.fishman.usercenter.controller
+          - com.fishman.fishmanChat.controller
 fishman:
   img: /img/
   job: "0 0 0 * * ? *"
   enable-bloom-filter: false
-  use-short-messaging-service: true
+  use-short-messaging-service: false
