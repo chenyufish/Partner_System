@@ -1,7 +1,7 @@
 import axios from "axios";
 import {showFailToast} from "vant";
 
-export const URL = 'localhost:8080/api';
+export const URL = '124.221.200.188:8080/api';
 
 let myAxios = axios.create({
     baseURL: 'http://' + URL

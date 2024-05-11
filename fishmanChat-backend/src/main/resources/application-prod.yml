@@ -5,8 +5,8 @@ spring:
   # DataSource Config
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://124.221.200.188:3306/fishmanchat?useUnicode=true&characterEncoding=utf-8
-    username: fishmanchat
+    url: jdbc:mysql://localhost:3306/yupao
+    username: root
     password: 030610CHENyu
   # session 失效时间
   session:
@@ -28,10 +28,9 @@ spring:
   #redis配置
   redis:
     port: 6379
-    host: 0.0.0.0
+    host: localhost
     database: 0
     #修改redis的数据库，redis带有16个数据库
-    password: 030610CHENyu
   profiles:
     active: dev
 server:

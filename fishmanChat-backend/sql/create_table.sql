@@ -1,9 +1,9 @@
 # 数据库初始化
 -- 创建库
-create database if not exists yupo;
+create database if not exists fishmanchat;
 
 -- 切换库
-use yupi;
+use fishmanchat;
 
 -- ----------------------------
 -- Table structure for user
