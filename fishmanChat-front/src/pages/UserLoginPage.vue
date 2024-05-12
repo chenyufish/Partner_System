@@ -3,7 +3,7 @@
     <van-row justify="center">
       <van-image
           width="343"
-          src="../../public/kunkun.png"
+          src="dist/kunkun.png"
           style="background-position:center"
       />
     </van-row>

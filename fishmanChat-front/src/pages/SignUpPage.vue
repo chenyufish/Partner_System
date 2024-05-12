@@ -2,7 +2,7 @@
   <van-row justify="center">
     <van-image
         width="343"
-        src="../../public/fishman.jpg"
+        src="dist/fishman.jpg"
         style="background-position:center"
     />
   </van-row>
@@ -154,7 +154,7 @@ const onSubmit = async () => {
   if (res?.data.code === 0) {
     showSuccessToast("注册成功")
     sessionStorage.setItem("token", res.data.data)
-    location.href = "/after"
+    location.href = "api/after"
   } else {
     showFailToast("注册失败," + res?.data.description ?? '')
   }
