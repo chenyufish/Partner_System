@@ -143,7 +143,7 @@ public class BlogCommentsServiceImpl extends ServiceImpl<BlogCommentsMapper, Blo
 
     /**
      * 点赞评论
-     *
+     *使用redis模拟消息队列实现点赞提醒，（redis的原子性操作对点赞进行计数）
      * @param commentId 评论id
      * @param userId    用户id
      */

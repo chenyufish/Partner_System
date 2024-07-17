@@ -167,7 +167,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     /**
      * 设置用户登录状态
-     *
+     *把redis存入用户信息，并设置过期时间
      * @param request    要求
      * @param safetyUser 安全用户
      */

@@ -108,6 +108,8 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team> implements Te
         } else {
             team.setExpireTime(null);
         }
+
+
         final long userId = loginUser.getId();
         // 校验信息
         validateTeamParam(userId, team);
@@ -119,6 +121,7 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team> implements Te
         if (!result || teamId == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "创建队伍失败");
         }
+
         // 9. 插入用户  => 队伍关系到关系表
         UserTeam userTeam = new UserTeam();
         userTeam.setUserId(userId);
@@ -323,7 +326,76 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team> implements Te
         userTeam.setJoinTime(new Date());
         return userTeamService.save(userTeam);
     }
-
+/**
+ *用分布式锁避免竞争入队和重复入队的问题
+ * private static final String JOIN_TEAM_LOCK_PREFIX = "joinTeamLock:";
+ *
+ * @Override
+ * public boolean joinTeam(TeamJoinRequest teamJoinRequest, User loginUser) {
+ *     if (teamJoinRequest == null) {
+ *         throw new BusinessException(ErrorCode.PARAMS_ERROR);
+ *     }
+ *     Long teamId = teamJoinRequest.getTeamId();
+ *     RLock lock = redissonClient.getLock(JOIN_TEAM_LOCK_PREFIX + teamId);
+ *     try {
+ *         // 尝试获取锁，等待时间为3秒，锁持有时间为10秒
+ *         if (lock.tryLock(3, 10, TimeUnit.SECONDS)) {
+ *             // 在获取锁后重新查询队伍信息，确保数据的一致性
+ *             Team team = getTeamById(teamId);
+ *             Date expireTime = team.getExpireTime();
+ *             if (expireTime != null && expireTime.before(new Date())) {
+ *                 throw new BusinessException(ErrorCode.PARAMS_ERROR, "队伍已过期");
+ *             }
+ *             Integer status = team.getStatus();
+ *             TeamStatusEnum teamStatusEnum = TeamStatusEnum.getEnumByValue(status);
+ *             if (TeamStatusEnum.PRIVATE.equals(teamStatusEnum)) {
+ *                 throw new BusinessException(ErrorCode.PARAMS_ERROR, "禁止加入私有队伍");
+ *             }
+ *             String password = teamJoinRequest.getPassword();
+ *             if (TeamStatusEnum.SECRET.equals(teamStatusEnum)) {
+ *                 if (StringUtils.isBlank(password) || !password.equals(team.getPassword())) {
+ *                     throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码错误");
+ *                 }
+ *             }
+ *             // 该用户已加入的队伍数量
+ *             long userId = loginUser.getId();
+ *             QueryWrapper<UserTeam> userTeamQueryWrapper = new QueryWrapper<>();
+ *             userTeamQueryWrapper.eq("user_id", userId);
+ *             long hasJoinNum = userTeamService.count(userTeamQueryWrapper);
+ *             if (hasJoinNum > MAXIMUM_JOINED_TEAM) {
+ *                 throw new BusinessException(ErrorCode.PARAMS_ERROR, "最多创建和加入 5 个队伍");
+ *             }
+ *             // 不能重复加入已加入的队伍
+ *             userTeamQueryWrapper = new QueryWrapper<>();
+ *             userTeamQueryWrapper.eq("user_id", userId);
+ *             userTeamQueryWrapper.eq("team_id", teamId);
+ *             long hasUserJoinTeam = userTeamService.count(userTeamQueryWrapper);
+ *             if (hasUserJoinTeam > 0) {
+ *                 throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户已加入该队伍");
+ *             }
+ *             // 已加入队伍的人数
+ *             long teamHasJoinNum = this.countTeamUserByTeamId(teamId);
+ *             if (teamHasJoinNum >= team.getMaxNum()) {
+ *                 throw new BusinessException(ErrorCode.PARAMS_ERROR, "队伍已满");
+ *             }
+ *             // 修改队伍信息
+ *             UserTeam userTeam = new UserTeam();
+ *             userTeam.setUserId(userId);
+ *             userTeam.setTeamId(teamId);
+ *             userTeam.setJoinTime(new Date());
+ *             return userTeamService.save(userTeam);
+ *         } else {
+ *             throw new BusinessException(ErrorCode.PARAMS_ERROR, "获取锁失败，请稍后重试");
+ *         }
+ *     } catch (InterruptedException e) {
+ *         throw new RuntimeException(e);
+ *     } finally {
+ *         if (lock.isHeldByCurrentThread()) {
+ *             lock.unlock();
+ *         }
+ *     }
+ * }
+ */
     /**
      * 退出团队
      *

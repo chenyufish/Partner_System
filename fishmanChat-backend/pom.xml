@@ -119,6 +119,7 @@
             <artifactId>easyexcel</artifactId>
             <version>3.1.0</version>
         </dependency>
+
         <!--添加swagger的依赖-->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
